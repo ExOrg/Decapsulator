@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Decapsulator package.
  *
@@ -9,27 +11,29 @@
  * file that was distributed with this source code.
  */
 
-namespace Exorg\Decapsulator\ObjectDecapsulator;
+namespace ExOrg\Decapsulator\ObjectDecapsulator;
 
 /**
- * AbstractNonStaticMethodsTest.
+ * Static methods test.
  * PHPUnit test class for ObjectDecapsulator class.
  *
  * @package Decapsulator
  * @author Katarzyna Krasińska <katheroine@gmail.com>
- * @copyright Copyright (c) 2015 Katarzyna Krasińska
- * @license http://http://opensource.org/licenses/MIT MIT License
+ * @copyright Copyright (c) Katarzyna Krasińska
+ * @license http://opensource.org/licenses/MIT MIT License
  * @link http://github.com/exorg/decapsulator
  */
-abstract class AbstractNonStaticMethodsTest extends AbstractObjectDecapsulatorTest
+abstract class AbstractStaticMethodsTestCase extends AbstractObjectDecapsulatorTestCase
 {
     /**
-     * Set up the fixtures and helpers.
-     * Called before a test is executed.
+     * Sets up the fixture, for example, open a network connection.
+     * This method is called before a test is executed.
+     *
+     * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
-        $this->initDeapsulatedObjectReflection();
+        $this->initDecapsulatedObjectReflection();
         $this->initDecapsulatedObject();
         $this->initDecapsulatorReflection();
         $this->initDecapsulator();

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Decapsulator package.
  *
@@ -9,40 +11,42 @@
  * file that was distributed with this source code.
  */
 
-namespace Exorg\Decapsulator\ObjectDecapsulator;
+namespace ExOrg\Decapsulator\ObjectDecapsulator;
 
 /**
- * ObjectDecapsulatorMagicAccessorsTest.
+ * Object decapsulator magic accessors test.
  * PHPUnit test class for ObjectDecapsulator class.
  *
  * @package Decapsulator
  * @author Katarzyna Krasińska <katheroine@gmail.com>
- * @copyright Copyright (c) 2015 Katarzyna Krasińska
- * @license http://http://opensource.org/licenses/MIT MIT License
+ * @copyright Copyright (c) Katarzyna Krasińska
+ * @license http://opensource.org/licenses/MIT MIT License
  * @link http://github.com/exorg/decapsulator
  */
-abstract class AbstractPropertyAccessorsTest extends AbstractObjectDecapsulatorTest
+abstract class AbstractPropertyAccessorsTestCase extends AbstractObjectDecapsulatorTestCase
 {
     /**
      * Names of the decapsulated object class properties.
      *
      * @var string
      */
-    const NONEXISTENT_PROPERTY = 'nonexistentProperty';
-    const PUBLIC_STATIC_PROPERTY = 'publicStaticProperty';
-    const PROTECTED_STATIC_PROPERTY = 'protectedStaticProperty';
-    const PRIVATE_STATIC_PROPERTY = 'privateStaticProperty';
-    const PUBLIC_PROPERTY = 'publicProperty';
-    const PROTECTED_PROPERTY = 'protectedProperty';
-    const PRIVATE_PROPERTY = 'privateProperty';
+    protected const NONEXISTENT_PROPERTY = 'nonexistentProperty';
+    private const PUBLIC_STATIC_PROPERTY = 'publicStaticProperty';
+    private const PROTECTED_STATIC_PROPERTY = 'protectedStaticProperty';
+    private const PRIVATE_STATIC_PROPERTY = 'privateStaticProperty';
+    private const PUBLIC_PROPERTY = 'publicProperty';
+    private const PROTECTED_PROPERTY = 'protectedProperty';
+    private const PRIVATE_PROPERTY = 'privateProperty';
 
     /**
-     * Set up the fixtures and helpers.
-     * Called before a test is executed.
+     * Sets up the fixture, for example, open a network connection.
+     * This method is called before a test is executed.
+     *
+     * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
-        $this->initDeapsulatedObjectReflection();
+        $this->initDecapsulatedObjectReflection();
         $this->initDecapsulatedObject();
         $this->initDecapsulatorReflection();
         $this->initDecapsulator();
@@ -55,7 +59,7 @@ abstract class AbstractPropertyAccessorsTest extends AbstractObjectDecapsulatorT
      * @param string $name
      * @param mixed $value
      */
-    protected function setDecapsulatedObjectProperty($name, $value)
+    protected function setDecapsulatedObjectProperty(string $name, mixed $value): void
     {
         $property = $this->decapsulatedObjectReflection->getProperty($name);
         $property->setAccessible(true);
@@ -66,9 +70,10 @@ abstract class AbstractPropertyAccessorsTest extends AbstractObjectDecapsulatorT
      * Get decapsualted object public or non-public property.
      *
      * @param string $name
+     *
      * @return mixed
      */
-    protected function getDecapsulatedObjectProperty($name)
+    protected function getDecapsulatedObjectProperty(string $name): mixed
     {
         $property = $this->decapsulatedObjectReflection->getProperty($name);
         $property->setAccessible(true);
@@ -80,18 +85,18 @@ abstract class AbstractPropertyAccessorsTest extends AbstractObjectDecapsulatorT
     /**
      * Provide existing properties names of the decapsulated object class.
      *
-     * @return array[string]
+     * @return string[]
      */
-    public function existingPropertiesProvider()
+    public static function existingPropertiesProvider(): array
     {
-        $existingProperties = array(
-            array(self::PUBLIC_STATIC_PROPERTY),
-            array(self::PROTECTED_STATIC_PROPERTY),
-            array(self::PRIVATE_STATIC_PROPERTY),
-            array(self::PUBLIC_PROPERTY),
-            array(self::PROTECTED_PROPERTY),
-            array(self::PRIVATE_PROPERTY),
-        );
+        $existingProperties = [
+            [self::PUBLIC_STATIC_PROPERTY],
+            [self::PROTECTED_STATIC_PROPERTY],
+            [self::PRIVATE_STATIC_PROPERTY],
+            [self::PUBLIC_PROPERTY],
+            [self::PROTECTED_PROPERTY],
+            [self::PRIVATE_PROPERTY],
+        ];
 
         return $existingProperties;
     }
